@@ -20,7 +20,7 @@ body {
   flex-direction: column;
   justify-content: center;
   border-radius: 20px;
-  background: linear-gradient(60deg, #212837, #ff84a2);
+  background: linear-gradient(60deg, #ff00d2, #00024d);
   box-shadow: 0 20px 40px rgba(52, 87, 220, 0.2);
 }
 
