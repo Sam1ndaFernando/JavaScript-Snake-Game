@@ -44,8 +44,6 @@ const changeDirection = e => {
         velocityY = 0;
     }
 }
-
-// Calling changeDirection on each key click and passing key dataset value as an object
 controls.forEach(button => button.addEventListener("click", () => changeDirection({ key: button.dataset.key })));
 
 const initGame = () => {
@@ -62,9 +60,26 @@ const initGame = () => {
         scoreElement.innerText = `Score: ${score}`;
         highScoreElement.innerText = `High Score: ${highScore}`;
     }
-    // Updating the snake's head position based on the current velocity
     snakeX += velocityX;
     snakeY += velocityY;
 
+    for (let i = snakeBody.length - 1; i > 0; i--) {
+        snakeBody[i] = snakeBody[i - 1];
+    }
+    snakeBody[1] = [snakeX, snakeY];
 
+    // Checking if the snake's head is out of wall, if so setting gameOver to true
+    if(snakeX <= 0 || snakeX > 30 || snakeY <= 0 || snakeY > 30) {
+        return gameOver = true;
+    }
+
+    for (let i = 0; i < snakeBody.length; i++) {
+        // Adding a div for each part of the snake's body
+        html += `<div class="head" style="grid-area: ${snakeBody[i][1]} / ${snakeBody[i][0]}"></div>`;
+        // Checking if the snake head hit the body
+        if (i !== 0 && snakeBody[0][1] === snakeBody[i][1] && snakeBody[0][0] === snakeBody[i][0]) {
+            gameOver = true;
+        }
+    }
+    playBoard.innerHTML = html;
 }
